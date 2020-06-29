@@ -10,6 +10,64 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+//instances of objects
+const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
+const engineer = new Engineer(data.name, data.id, data.email, data.github);
+const intern = new Intern(data.name, data.id, data.email, data.school);
+//array of general questions
+const generalQuestions = [
+  {
+    type: "list",
+    message: "What is the NAME of employee?",
+    name: "name",
+  },
+  {
+    type: "list",
+    message: "What is the ID for employee?",
+    name: "id",
+  },
+  {
+    type: "list",
+    message: "What is the EMAIL of employee?",
+    name: "email",
+  },
+];
+//prompt questions
+inquirer
+  .prompt({
+    type: "list",
+    message: "What type of employee do you want to choose?",
+
+    name: "Employee",
+    choices: ["Engineer", "Manager", "Intern"],
+  })
+  .then(function (data) {
+    //questions about Manager
+    if (data.Employee === "Manager") {
+      inquirer.prompt(generalQuestions, {
+        type: "list",
+        message: "What is the OFFICE NUMBER of employee?",
+        name: "officeNumber",
+      });
+    }
+    //questions about Engineer
+    else if (data.Employee === "Engineer") {
+      inquirer.prompt(generalQuestions, {
+        type: "list",
+        message: "What is the GITHUB of employee?",
+        name: "github",
+      });
+    }
+    //questions about Intern
+    else if (data.Employee === "Intern") {
+      inquirer.prompt(generalQuestions, {
+        type: "list",
+        message: "What is the SCHOOL of employee?",
+        name: "school",
+      });
+    }
+    // ????? probably here should go RENDER function 
+  });
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
