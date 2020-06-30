@@ -13,46 +13,42 @@ const render = require("./lib/htmlRenderer");
 
 const employees = [];
 
-// //instances of objects
- let manager;
- let engineer;
- let intern;
+ //instances of objects declared
+let manager;
+let engineer;
+let intern;
 
- //validation????
-
+//validation should be added as an option
 
 const askQuestions = function () {
-  inquirer
-    .prompt(generalQuestions)
-    .then(completeQuestionary);
+  inquirer.prompt(generalQuestions).then(completeQuestionary);
 };
 
 const completeQuestionary = function (values) {
   let employee;
-  // questions about Manager
+  // info about Manager
   if (values.Employee == "Manager") {
     const { name, id, email, officeNumber } = values;
     employee = new Manager(name, id, email, officeNumber);
   }
-  //questions about Engineer
+  //info about Engineer
   else if (values.Employee == "Engineer") {
     const { name, id, email, github } = values;
     employee = new Engineer(name, id, email, github);
   }
-  //questions about Intern
+  //info about Intern
   else if (values.Employee == "Intern") {
     const { name, id, email, school } = values;
     employee = new Intern(name, id, email, school);
   }
 
   employees.push(employee);
-  console.log(employees)
+  console.log(employees);
 
   if (!values.done) return askQuestions();
 
   // write a file should goes he
-  
-}
+};
 
 //prompt questions
 askQuestions();
