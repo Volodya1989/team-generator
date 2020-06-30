@@ -10,64 +10,98 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-//instances of objects
-const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
-const engineer = new Engineer(data.name, data.id, data.email, data.github);
-const intern = new Intern(data.name, data.id, data.email, data.school);
+const employees = [];
+
+// //instances of objects
+ let manager;
+ let engineer;
+ let intern;
+
+ //validation????
+
 //array of general questions
 const generalQuestions = [
   {
-    type: "list",
-    message: "What is the NAME of employee?",
-    name: "name",
-  },
-  {
-    type: "list",
-    message: "What is the ID for employee?",
-    name: "id",
-  },
-  {
-    type: "list",
-    message: "What is the EMAIL of employee?",
-    name: "email",
-  },
-];
-//prompt questions
-inquirer
-  .prompt({
     type: "list",
     message: "What type of employee do you want to choose?",
 
     name: "Employee",
     choices: ["Engineer", "Manager", "Intern"],
-  })
-  .then(function (data) {
-    //questions about Manager
-    if (data.Employee === "Manager") {
-      inquirer.prompt(generalQuestions, {
-        type: "list",
-        message: "What is the OFFICE NUMBER of employee?",
-        name: "officeNumber",
-      });
-    }
-    //questions about Engineer
-    else if (data.Employee === "Engineer") {
-      inquirer.prompt(generalQuestions, {
-        type: "list",
-        message: "What is the GITHUB of employee?",
-        name: "github",
-      });
-    }
-    //questions about Intern
-    else if (data.Employee === "Intern") {
-      inquirer.prompt(generalQuestions, {
-        type: "list",
-        message: "What is the SCHOOL of employee?",
-        name: "school",
-      });
-    }
-    // ????? probably here should go RENDER function 
-  });
+  },
+  {
+    type: "input",
+    message: "What is the NAME of employee?",
+    name: "name",
+  },
+  {
+    type: "input",
+    message: "What is the ID for employee?",
+    name: "id",
+  },
+  {
+    type: "input",
+    message: "What is the EMAIL of employee?",
+    name: "email",
+  },
+  {
+    type: "input",
+    message: "What is the GITHUB of employee?",
+    name: "github",
+    when: (values) => values.Employee == "Engineer",
+  },
+  {
+    type: "input",
+    message: "What is the OFFICE NUMBER of employee?",
+    name: "officeNumber",
+    when: (values) => values.Employee == "Manager",
+  },
+  {
+    type: "input",
+    message: "What is the SCHOOL of employee?",
+    name: "school",
+    when: (values) => values.Employee == "Intern",
+  },
+  {
+    type: "confirm",
+    message: "Are you done?",
+    name: "done"
+  }
+];
+
+const askQuestions = function () {
+  inquirer
+    .prompt(generalQuestions)
+    .then(completeQuestionary);
+};
+
+const completeQuestionary = function (values) {
+  let employee;
+  // questions about Manager
+  if (values.Employee == "Manager") {
+    const { name, id, email, officeNumber } = values;
+    employee = new Manager(name, id, email, officeNumber);
+  }
+  //questions about Engineer
+  else if (values.Employee == "Engineer") {
+    const { name, id, email, github } = values;
+    employee = new Engineer(name, id, email, github);
+  }
+  //questions about Intern
+  else if (values.Employee == "Intern") {
+    const { name, id, email, school } = values;
+    employee = new Intern(name, id, email, school);
+  }
+
+  employees.push(employee);
+  console.log(employees)
+
+  if (!values.done) return askQuestions();
+
+  // write a file should goes he
+}
+
+//prompt questions
+askQuestions();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
