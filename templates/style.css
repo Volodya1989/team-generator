@@ -1,0 +1,17 @@
+body {
+  background-image: url("../Assets/bilal-o-3miCLVoR3l8-unsplash.jpg");
+  /* background-color: rgb(165, 216, 233); */
+}
+.jumbotron {
+  background-color: rgb(165, 16, 179);
+  color: white;
+}
+.card {
+  margin-right: 20px;
+  opacity: 0.9;
+}
+
+div.card-header {
+  background-color: rgb(243, 173, 81);
+
+}
