@@ -43,7 +43,6 @@ const completeQuestionary = function (values) {
   }
 
   employees.push(employee);
-  console.log(employees);
 
   if (!values.done) return askQuestions();
 
