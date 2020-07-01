@@ -13,7 +13,7 @@ const render = require("./lib/htmlRenderer");
 
 const employees = [];
 
- //instances of objects declared
+//instances of objects declared
 let manager;
 let engineer;
 let intern;
@@ -47,7 +47,7 @@ const completeQuestionary = function (values) {
 
   if (!values.done) return askQuestions();
 
-  // write a file should goes he
+  // write a file should go he
 };
 
 //prompt questions
