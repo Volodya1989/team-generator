@@ -47,7 +47,9 @@ const completeQuestionary = function (values) {
 
   if (!values.done) return askQuestions();
 
-  // write a file should go he
+  // write to a file 
+  fs.writeFileSync(outputPath, render(employees), "utf-8");
+
 };
 
 //prompt questions
