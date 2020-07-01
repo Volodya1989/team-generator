@@ -1,5 +1,4 @@
-# gt-hw-team-generator
-# Readme Generator
+# Team Generator CLI Application
 
 ![badmath](https://img.shields.io/badge/TEAM-generator-red)
 
