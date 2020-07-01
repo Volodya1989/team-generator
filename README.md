@@ -26,8 +26,11 @@ This Team Generator was created as command line application for those people who
 
 The following video demonstrates the application functionality:
 
-
 [Link to the demo video of the TEAM Generator Application](https://drive.google.com/file/d/190qrqp-sqcr3zby_Ien2RhYMIVUXIW8X/view?usp=sharing)
+
+The following screenshot demonstrates the application functionality:
+
+![TEAM Generator  demo](./Assets/Screenshot.png)
 
 
 ## Credits
